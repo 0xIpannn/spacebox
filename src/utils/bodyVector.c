@@ -22,7 +22,6 @@ Body *vector_get_by_index(BodyVector *vec, size_t index) {
     return &vec->data[index];
   }
 
-  // if out of bound, return default body
   return nullptr;
 }
 
@@ -33,7 +32,6 @@ Body *vector_get_by_id(BodyVector *vec, unsigned int id) {
     }
   }
 
-  // if not found, return default body
   return nullptr;
 }
 

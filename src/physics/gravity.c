@@ -1,12 +1,8 @@
 #include "gravity.h"
+#include "physics/constants.h"
 #include <raymath.h>
 
 Vector3 calculate_grav_force(Body body1, Body body2) {
-  // Normally G is 6.6743e-11 but this software use
-  // this value instead, to scale with the distance unit used.
-  // (1 Distance Unit = 5e6KM)
-  const float G = 7.9275e-3f;
-
   Vector3 direction = Vector3Subtract(body2.position, body1.position);
   float distanceSquared = Vector3LengthSqr(direction);
 
@@ -14,7 +10,8 @@ Vector3 calculate_grav_force(Body body1, Body body2) {
     return Vector3Zero();
   }
 
-  float forceManitude = (G * body1.mass * body2.mass) / distanceSquared;
+  float forceManitude =
+      (GRAVITATIONAL_CONSTANT * body1.mass * body2.mass) / distanceSquared;
   return Vector3Scale(Vector3Normalize(direction), forceManitude);
 }
 

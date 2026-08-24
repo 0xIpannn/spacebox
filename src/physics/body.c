@@ -1,6 +1,6 @@
+#include "body.h"
+#include "physics/constants.h"
 #include "raymath.h"
-
-#include "physics/body.h"
 #include <stdio.h>
 
 static unsigned int next_id = 1;
@@ -36,8 +36,7 @@ void body_orbit_auto(Body *body1, Body *body2) {
   if (distance < 0.0001f)
     return;
 
-  const float G = 1.0f;
-  float orbital_speed = sqrtf(G * body2->mass / distance);
+  float orbital_speed = sqrtf(GRAVITATIONAL_CONSTANT * body2->mass / distance);
 
   Vector3 tangent =
       Vector3Normalize((Vector3){-direction.z, 0.0f, direction.x});
