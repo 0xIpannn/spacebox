@@ -8,4 +8,4 @@ typedef struct {
 
 void simulation_init(Simulation *sim);
 void simulation_update(Simulation *sim, float dt);
-bool simulation_add_body(Simulation *sim, Body body);
+void simulation_shutdown(Simulation *sim);

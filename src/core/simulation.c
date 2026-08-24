@@ -1,13 +1,11 @@
 #include "simulation.h"
+#include "physics/constants.h"
 #include "physics/gravity.h"
 #include "physics/integrator.h"
 #include "scenario/solarSystem.h"
 #include "utils/bodyVector.h"
 #include <raylib.h>
 #include <stddef.h>
-
-// to achieve 25 sec per 1 earth revolution on 1x speed
-const float SIM_SPEED = 14.61f;
 
 void simulation_init(Simulation *sim) {
   sim->timeMultiplier = 1.0f;
@@ -24,3 +22,5 @@ void simulation_update(Simulation *sim, float dt) {
                      dt * SIM_SPEED * sim->timeMultiplier);
   }
 }
+
+void simulation_shutdown(Simulation *sim) { vector_free(&sim->bodies); }

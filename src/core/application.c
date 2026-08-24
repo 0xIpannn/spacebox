@@ -75,6 +75,6 @@ void app_run() {
 
   CloseWindow();
   ui_shutdown(&ui);
-
+  simulation_shutdown(sim);
   free(sim);
 }
