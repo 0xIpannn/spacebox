@@ -5,5 +5,7 @@
 // (1 Distance Unit = 5e6KM)
 #define GRAVITATIONAL_CONSTANT 7.9275e-3f
 
-// to achieve ~25 sec per 1 earth revolution on 1x speed
-#define SIM_SPEED 14.61f
+#define EARTH_PERIOD_UNIT 365.0f
+#define SECONDS_PER_PERIOD 30.0f
+#define SIM_SPEED                                                              \
+  (EARTH_PERIOD_UNIT / SECONDS_PER_PERIOD) // 1 year in 30 seconds

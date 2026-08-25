@@ -1,5 +1,4 @@
 #include "simulation.h"
-#include "physics/constants.h"
 #include "physics/gravity.h"
 #include "physics/integrator.h"
 #include "scenario/solarSystem.h"
@@ -13,13 +12,11 @@ void simulation_init(Simulation *sim) {
   solar_system_init(&sim->bodies);
 }
 
-void simulation_update(Simulation *sim, float dt) {
+void simulation_step(Simulation *sim, float stepDt) {
   reset_acceleration(sim->bodies, sim->bodies.count);
   apply_gravity(sim->bodies, sim->bodies.count);
-
   for (size_t i = 0; i < sim->bodies.count; i++) {
-    symplectic_euler(&sim->bodies.data[i],
-                     dt * SIM_SPEED * sim->timeMultiplier);
+    symplectic_euler(&sim->bodies.data[i], stepDt);
   }
 }
 

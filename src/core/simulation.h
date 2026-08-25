@@ -7,5 +7,5 @@ typedef struct {
 } Simulation;
 
 void simulation_init(Simulation *sim);
-void simulation_update(Simulation *sim, float dt);
+void simulation_step(Simulation *sim, float stepDt);
 void simulation_shutdown(Simulation *sim);

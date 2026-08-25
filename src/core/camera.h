@@ -16,5 +16,5 @@ typedef struct {
 } CameraController;
 
 void camera_init(CameraController *cc);
-void camera_update(CameraController *cc);
+void camera_update(CameraController *cc, float dt);
 Camera3D get_camera(CameraController *cc);

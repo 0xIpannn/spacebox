@@ -11,8 +11,13 @@
 #include "core/camera.h"
 #include "core/selection.h"
 #include "core/simulation.h"
+#include "physics/constants.h"
 #include "renderer/renderer.h"
 #include "renderer/ui.h"
+
+// fixed timestep constants for simulation
+#define PHYS_DT (1.0f / 240.0f)
+#define MAX_FRAME_TIME 0.25f
 
 void app_run() {
   const int screenWidth = 1600;
@@ -34,11 +39,21 @@ void app_run() {
   int selectedBodyId = 0;
   Body *selectedBody = nullptr;
 
+  // fixed timestep var
+  float accumulator = 0.0f;
+
   // Main game loop
   while (!WindowShouldClose()) {
     float dt = GetFrameTime();
-    simulation_update(sim, dt);
-    camera_update(&cc);
+    accumulator += dt;
+    if (accumulator > MAX_FRAME_TIME)
+      accumulator = MAX_FRAME_TIME;
+
+    while (accumulator >= PHYS_DT) {
+      simulation_step(sim, PHYS_DT * SIM_SPEED * sim->timeMultiplier);
+      accumulator -= PHYS_DT;
+    }
+    camera_update(&cc, dt);
 
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
       Vector2 mousePos = GetMousePosition();
