@@ -13,8 +13,8 @@ void simulation_init(Simulation *sim) {
 }
 
 void simulation_step(Simulation *sim, float stepDt) {
-  reset_acceleration(sim->bodies, sim->bodies.count);
-  apply_gravity(sim->bodies, sim->bodies.count);
+  reset_acceleration(sim->bodies);
+  apply_gravity(sim->bodies);
   for (size_t i = 0; i < sim->bodies.count; i++) {
     symplectic_euler(&sim->bodies.data[i], stepDt);
   }

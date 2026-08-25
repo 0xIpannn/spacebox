@@ -68,7 +68,7 @@ void app_run() {
 
     BeginMode3D(get_camera(&cc));
 
-    draw_bodies(sim->bodies, sim->bodies.count);
+    draw_bodies(sim->bodies);
     DrawGrid(500, 10.0f);
 
     if (selectedBodyId != 0) {

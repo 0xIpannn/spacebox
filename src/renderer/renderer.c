@@ -1,8 +1,8 @@
 #include "renderer.h"
 #include "rlgl.h"
 
-void draw_bodies(BodyVector bodies, int count) {
-  for (int i = 0; i < count; i++) {
+void draw_bodies(BodyVector bodies) {
+  for (int i = 0; i < bodies.count; i++) {
     DrawSphere(bodies.data[i].position, bodies.data[i].radius,
                bodies.data[i].color);
   }

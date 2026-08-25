@@ -15,18 +15,18 @@ Vector3 calculate_grav_force(Body body1, Body body2) {
   return Vector3Scale(Vector3Normalize(direction), forceMagnitude);
 }
 
-void reset_acceleration(BodyVector bodies, int count) {
-  for (int i = 0; i < count; i++) {
+void reset_acceleration(BodyVector bodies) {
+  for (int i = 0; i < bodies.count; i++) {
     bodies.data[i].acceleration = Vector3Zero();
   }
 }
 
-void apply_gravity(BodyVector bodies, int count) {
-  for (int i = 0; i < count; i++) {
+void apply_gravity(BodyVector bodies) {
+  for (int i = 0; i < bodies.count; i++) {
     if (!bodies.data[i].isActive || bodies.data[i].mass == 0.0f)
       continue;
 
-    for (int j = i + 1; j < count; j++) {
+    for (int j = i + 1; j < bodies.count; j++) {
       if (!bodies.data[j].isActive || bodies.data[j].mass == 0.0f)
         continue;
 
