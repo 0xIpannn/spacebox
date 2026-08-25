@@ -3,16 +3,17 @@
 #include <raymath.h>
 
 static void handle_camera_movement(CameraController *cc) {
+  float movementSpeed = cc->movementSpeed * GetFrameTime();
+  if (IsKeyDown(KEY_LEFT_SHIFT))
+    movementSpeed *= 2.0f;
   if (IsKeyDown(KEY_W))
-    cc->movement.x += 0.1f;
+    cc->movement.x = movementSpeed;
   if (IsKeyDown(KEY_S))
-    cc->movement.x -= 0.1f;
+    cc->movement.x -= movementSpeed;
   if (IsKeyDown(KEY_A))
-    cc->movement.y -= 0.1f;
+    cc->movement.y -= movementSpeed;
   if (IsKeyDown(KEY_D))
-    cc->movement.y += 0.1f;
-
-  cc->movement = Vector3Scale(cc->movement, cc->movementSpeed);
+    cc->movement.y += movementSpeed;
 }
 
 static void handle_camera_rotation(CameraController *cc) {
@@ -52,7 +53,7 @@ void camera_init(CameraController *cc) {
   cc->cam.fovy = 45.0f;
   cc->cam.projection = CAMERA_PERSPECTIVE;
 
-  cc->movementSpeed = 5.0f;
+  cc->movementSpeed = 20.0f;
   cc->rotationSpeed = 0.1f;
   cc->zoomMultiplier = 5.0f;
 }
