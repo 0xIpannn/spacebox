@@ -10,9 +10,9 @@ Vector3 calculate_grav_force(Body body1, Body body2) {
     return Vector3Zero();
   }
 
-  float forceManitude =
+  float forceMagnitude =
       (GRAVITATIONAL_CONSTANT * body1.mass * body2.mass) / distanceSquared;
-  return Vector3Scale(Vector3Normalize(direction), forceManitude);
+  return Vector3Scale(Vector3Normalize(direction), forceMagnitude);
 }
 
 void reset_acceleration(BodyVector bodies, int count) {
