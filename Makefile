@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -I src -std=c23 -02 -g -MMD -MP
+CFLAGS = -Wall -Wextra -I src -std=c23 -O2 -g -MMD -MP
 LDLIBS = -lraylib -lm
 
 SRC = src/main.c $(wildcard src/**/*.c src/*.c) 

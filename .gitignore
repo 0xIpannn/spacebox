@@ -58,6 +58,7 @@ packages/
 *.dll
 *.h.pch
 ./*.obj
+*.d
 spacebox
 
 # Ignore SDL libs for testing
