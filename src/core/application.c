@@ -37,10 +37,10 @@ void app_run() {
   ui_init(&ui);
 
   int selectedBodyId = 0;
-  Body *selectedBody = nullptr;
-
   // fixed timestep var
   float accumulator = 0.0f;
+
+  float lastTimeMult = 0.0f;
 
   // Main game loop
   while (!WindowShouldClose()) {
@@ -55,12 +55,30 @@ void app_run() {
     }
     camera_update(&cc, dt);
 
+    if (IsKeyPressed(KEY_GRAVE)) {
+      if (sim->timeMultiplier != 0.0f) {
+        lastTimeMult = sim->timeMultiplier;
+        sim->timeMultiplier = 0.0f;
+      } else {
+        sim->timeMultiplier = lastTimeMult;
+      }
+    }
+    if (IsKeyPressed(KEY_ONE)) {
+      sim->timeMultiplier = 1.0f;
+    }
+    if (IsKeyPressed(KEY_TWO)) {
+      sim->timeMultiplier = 10.0f;
+    }
+    if (IsKeyPressed(KEY_THREE)) {
+      sim->timeMultiplier = 100.0f;
+    }
+
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
       Vector2 mousePos = GetMousePosition();
       selectedBodyId =
           selection_pick_body(&sim->bodies, get_camera(&cc), mousePos);
-      selectedBody = vector_get_by_id(&sim->bodies, selectedBodyId);
     };
+    Body *selectedBody = vector_get_by_id(&sim->bodies, selectedBodyId);
 
     BeginDrawing();
 
