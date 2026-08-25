@@ -58,6 +58,7 @@ packages/
 *.dll
 *.h.pch
 ./*.obj
+spacebox
 
 # Ignore SDL libs for testing
 src/external/SDL2
