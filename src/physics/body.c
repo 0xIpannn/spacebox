@@ -54,7 +54,14 @@ Body body_create_black_hole(const char *name, Vector3 position,
                             Color color, float eventHorizonRadius) {
   Body body = body_create(name, position, velocity, mass, radius, color);
   body.type = BODY_BLACK_HOLE;
-  body.eventHorizonRadius = eventHorizonRadius;
+
+  // calculate schwarzchild radius if not provided
+  if (eventHorizonRadius != 0.0f) {
+    body.eventHorizonRadius = eventHorizonRadius;
+  } else {
+    body.eventHorizonRadius = (2.0f * G * mass) / (C * C);
+  }
+
   return body;
 };
 
